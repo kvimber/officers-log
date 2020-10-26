@@ -11,12 +11,16 @@ App is hosted on Github Pages. Go to it here!
 
 * Commands
   
-** Find Github Pages Build: =gh api repos/:owner/:repo/pages/builds/latest=
+** Find Github Pages Build
+
+*** CLI: =gh api repos/:owner/:repo/pages/builds/latest=
 
 - need to be in the project directory
 - [[https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#list-github-pages-builds][List Github Pages Build (Github API Docs)]]
 - [[https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#get-latest-pages-build][Get latest Pages build (Github API Docs)]]
 - *note* this is using the [[https://cli.github.com/][Github CLI]]
+
+*** Web: [[https://github.com/kvimber/officers-log/deployments][officers-log Deployments Page (Github)]]
 
 ** Local: Run: =python3 -m http.server=
 
