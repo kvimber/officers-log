@@ -1,0 +1,66 @@
+* Officer's Log: Can Time Tracking be Cool?
+
+This app does two things:
+
+- helps me track my time how I'd like to (stopwatch vs pomodoros, etc)
+- let's me play with [[https://web.dev/progressive-web-apps/][Progressive Web Apps (PWAs)]]
+
+App is hosted on Github Pages. Go to it here!
+
+  https://kvimber.github.io/officers-log/
+
+* Commands
+  
+** Find Github Pages Build: =gh api repos/:owner/:repo/pages/builds/latest=
+
+- need to be in the project directory
+- [[https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#list-github-pages-builds][List Github Pages Build (Github API Docs)]]
+- [[https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#get-latest-pages-build][Get latest Pages build (Github API Docs)]]
+- *note* this is using the [[https://cli.github.com/][Github CLI]]
+
+** Local: Run: =python3 -m http.server=
+
+- all you really need to do is serve the files locally
+- I tend to do this with python
+- python3 version is above
+- for python2, I think the command is this:
+  - =python -m HTTP.Server=
+  - but I'm not sure, so you might have to look it up if it doesn't work (/ check CLI history)
+
+* What's Next?
+
+** TODO Automate Chrome Lighthouse Checks
+** TODO Actually write the code I want?
+
+* Story
+
+** [2020-10-25 Sun] Fix slashes because site not served from domain root
+
+- turns out a lot of the pages were getting 404 results
+- found running Lighthouse tools PWA Audits
+- wasn't sure about the issue, but I could see a number of the resources were trying to be loaded from the domain root
+  - ie: kvimber.github.io/manifest.json
+  - rather than at the project subdomain: officers-log/manifest.json
+- so I tried removing the root slashes from the beginning of the URLs in the code
+- did this in [[https://github.com/kvimber/officers-log/commit/661cbb9057b63ef33e4c3fddbf1b0f2e880e8410][commit 661cbb90]]
+  - forgot one more in the manifest: fixed in [[https://github.com/kvimber/officers-log/commit/9bcf72e1b2a52b62376cd62dc8a224bb6a980ab4][commit 9bcf72d1]]
+- worked!
+  
+** [2020-10-25 Sun] Configure Github to Serve the Site
+
+- this was pretty simple, but there was a timing hiccup that I didn't understand at first
+- just set the publishing source from the repo settings
+  - in my case: just setting the repo to publish from the =main= branch at the root folder
+  - [[https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#choosing-a-publishing-source][Configuring a publishing source for your GitHub Pages site (Github Docs)]]
+- the hiccup was that the project needs a Github Pages build to run after you configure this
+- so there's a bit of a delay until the site really shows up
+- which I later found I could figure out using the Github CLI
+  - specifically the API subcommand
+  - look to the "Find Github Pages Build" command above for how to do this
+
+** [2020-10-25 Sun] Initial Site Creation
+
+- site created from [[https://medium.com/james-johnson/a-simple-progressive-web-app-tutorial-f9708e5f2605][A Simple Progressive Web App Tutorial (Medium)]]
+  - written by [[https://medium.com/@james.johnson280][James Johnson]]
+  - code saved on github: [[https://github.com/jamesjohnson280/hello-pwa][jamesjohnson280/hello-pwa]]
+- done as [[https://github.com/kvimber/officers-log/commit/948171f09b05eac52956639dcd82717a75715934][commit 948171f0]]
